@@ -1,0 +1,34 @@
+name: Deploy via Docker
+
+on:
+  push:
+    branches: [could_it_be_stable_branch]
+    # TODO: Add condition
+    # on pull_request merged on stable example
+    # with tag :deploy:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: rsync deployments
+        uses: burnett01/rsync-deployments@4.1
+        with:
+          switches: -avzr --delete
+          path: './*'
+          remote_path: ${{ secrets.REMOTE_DIR }}
+          remote_host: ${{ secrets.REMOTE_HOST }}
+          remote_port: ${{ secrets.DEPLOY_PORT }}
+          remote_user: ${{ secrets.REMOTE_USER }}
+          remote_key: ${{ secrets.SSH_KEY }}
+
+      - name: Executes docker-compose remotly
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          key: ${{ secrets.SSH_KEY }}
+          script: 'cp ${{ secrets.REMOTE_ENVIRONMENTS_PATH }} ${{ secrets.REMOTE_DIR }}.env && cd ${{ secrets.REMOTE_DIR }} && docker-compose --file docker-compose-prod.yml up --build -d'
