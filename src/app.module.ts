@@ -5,7 +5,7 @@ import { serviceConfig } from 'src/configs/service.config';
 import { InstitutionsConroller } from 'src/controllers';
 import { Institution, InstitutionSchema } from 'src/entities';
 import { InstitutionsProvider } from 'src/providers';
-import { InstitutionsService } from 'src/services/';
+import { InstitutionsService } from 'src/services';
 
 @Module({
   imports: [

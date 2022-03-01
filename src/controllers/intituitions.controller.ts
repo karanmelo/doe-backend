@@ -1,6 +1,6 @@
 import { Controller, Get, Injectable, Param } from '@nestjs/common';
 
-import { InstitutionDto } from 'src/commons/dtos';
+import { InstitutionDto } from 'src/common/dtos';
 import { routesConfig } from 'src/configs/routes.config';
 import { InstitutionsService } from 'src/services/institutions.service';
 

@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
-import { InstitutionDto } from 'src/commons/dtos';
+import { InstitutionDto } from 'src/common/dtos';
 import { Institution } from 'src/entities';
 import { InstitutionsData } from 'src/providers';
 

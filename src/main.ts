@@ -4,7 +4,7 @@ import { NestFactory } from '@nestjs/core';
 import * as config from 'config';
 
 import { AppModule } from 'src/app.module';
-import { ServerConfig } from 'src/commons/interfaces';
+import { ServerConfig } from 'src/common/interfaces';
 import { validateEnvs } from 'src/configs/dotenv.validator';
 import { serviceConfig } from 'src/configs/service.config';
 import swagger from 'src/configs/swagger.config';
