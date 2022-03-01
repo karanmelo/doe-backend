@@ -5,6 +5,7 @@ import { InstitutionsRepository } from 'src/repositories/institutions.repository
 
 export abstract class InstitutionsData {
   getAll: () => Promise<Institution[]>;
+  getById: (institutionId: string) => Promise<Institution>;
 }
 
 export const InstitutionsProvider: Provider<InstitutionsData> = {

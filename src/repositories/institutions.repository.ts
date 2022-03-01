@@ -16,4 +16,8 @@ export class InstitutionsRepository implements InstitutionsData {
   async getAll(): Promise<Institution[]> {
     return this.institutionModel.find();
   }
+
+  async getById(institutionId: string): Promise<Institution> {
+    return this.institutionModel.findById(institutionId);
+  }
 }
