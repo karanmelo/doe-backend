@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
-import { InstitutionDto } from 'src/common/dtos';
+import { CreateInstitutionDto, InstitutionDto } from 'src/common/dtos';
 import { Institution } from 'src/entities';
 import { InstitutionsData } from 'src/providers';
 
@@ -8,15 +8,15 @@ import { InstitutionsData } from 'src/providers';
 export class InstitutionsService {
   constructor(private institutionsProvider: InstitutionsData) {}
 
-  async getAll(): Promise<InstitutionDto[]> {
-    const institutions = await this.institutionsProvider.getAll();
+  async get(): Promise<InstitutionDto[]> {
+    const institutions = await this.institutionsProvider.get();
 
     return institutions.map(
       (institution: Institution) => new InstitutionDto(institution as any),
     );
   }
 
-  async getById(institutionId): Promise<InstitutionDto> {
+  async getById(institutionId: string): Promise<InstitutionDto> {
     try {
       const institution = await this.institutionsProvider.getById(
         institutionId,
@@ -25,6 +25,20 @@ export class InstitutionsService {
       return new InstitutionDto(institution as any);
     } catch (error) {
       const errorMessage = `Error trying to get institution data for ID ${institutionId}. ${error.message}.`;
+
+      throw new InternalServerErrorException(errorMessage);
+    }
+  }
+
+  async create(institutionDto: CreateInstitutionDto): Promise<InstitutionDto> {
+    try {
+      const institution = await this.institutionsProvider.create(
+        institutionDto,
+      );
+
+      return new InstitutionDto(institution as any);
+    } catch (error) {
+      const errorMessage = `Error trying to save institution data. ${error.message}.`;
 
       throw new InternalServerErrorException(errorMessage);
     }

@@ -6,15 +6,17 @@ export class ImageDto {
 
 export class InstitutionDto {
   constructor(institutionModel: InsitutionDocument) {
-    this.id = institutionModel._id;
-    this.name = institutionModel.name;
-    this.latitude = institutionModel.latitude;
-    this.longitude = institutionModel.longitude;
-    this.about = institutionModel.about;
-    this.instructions = institutionModel.instructions;
-    this.opening_hours = institutionModel.opening_hours;
-    this.open_on_weekends = institutionModel.open_on_weekends;
-    this.images = institutionModel.images;
+    if (institutionModel) {
+      this.id = institutionModel._id;
+      this.name = institutionModel.name;
+      this.latitude = institutionModel.latitude;
+      this.longitude = institutionModel.longitude;
+      this.about = institutionModel.about;
+      this.instructions = institutionModel.instructions;
+      this.opening_hours = institutionModel.opening_hours;
+      this.open_on_weekends = institutionModel.open_on_weekends;
+      this.images = institutionModel.images;
+    }
   }
 
   id: string;

@@ -1,7 +1,8 @@
 export const routesConfig = {
   institutions: {
     _: 'institutions',
-    list: '/',
-    getById: '/',
+    get: '/',
+    getById: '/:id',
+    create: '/',
   },
 };

@@ -1,1 +1,1 @@
-export * from 'src/controllers/intituitions.controller';
+export * from 'src/controllers/institutions.controller';
