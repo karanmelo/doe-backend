@@ -1,5 +1,7 @@
 import { Prop, Schema } from '@nestjs/mongoose';
 
+import { Document } from 'mongoose';
+
 import { SchemaFactoryWithMethods } from 'src/commons/utils/';
 
 export class Image {
@@ -38,6 +40,8 @@ export class Institution {
   @Prop()
   images: Image[];
 }
+
+export type InsitutionDocument = Institution & Document;
 
 export const InstitutionSchema =
   SchemaFactoryWithMethods.createForClass(Institution);

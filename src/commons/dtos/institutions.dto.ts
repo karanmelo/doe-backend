@@ -1,12 +1,12 @@
-import { Institution } from 'src/entities';
-
+import { InsitutionDocument } from 'src/entities';
 export class ImageDto {
   id: number;
   path: string;
 }
 
 export class InstitutionDto {
-  constructor(institutionModel: Institution) {
+  constructor(institutionModel: InsitutionDocument) {
+    this.id = institutionModel._id;
     this.name = institutionModel.name;
     this.latitude = institutionModel.latitude;
     this.longitude = institutionModel.longitude;
@@ -17,6 +17,7 @@ export class InstitutionDto {
     this.images = institutionModel.images;
   }
 
+  id: string;
   name: string;
   latitude: number;
   longitude: number;

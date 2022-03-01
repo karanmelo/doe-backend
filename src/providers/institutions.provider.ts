@@ -1,11 +1,11 @@
 import { Provider } from '@nestjs/common';
 
-import { Institution } from 'src/entities';
+import { InsitutionDocument } from 'src/entities';
 import { InstitutionsRepository } from 'src/repositories/institutions.repository';
 
 export abstract class InstitutionsData {
-  getAll: () => Promise<Institution[]>;
-  getById: (institutionId: string) => Promise<Institution>;
+  getAll: () => Promise<InsitutionDocument[]>;
+  getById: (institutionId: string) => Promise<InsitutionDocument>;
 }
 
 export const InstitutionsProvider: Provider<InstitutionsData> = {

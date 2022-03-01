@@ -1,5 +1,6 @@
-import { Controller, Get, Injectable } from '@nestjs/common';
+import { Controller, Get, Injectable, Param } from '@nestjs/common';
 
+import { InstitutionDto } from 'src/commons/dtos';
 import { routesConfig } from 'src/configs/routes.config';
 import { InstitutionsService } from 'src/services/institutions.service';
 
@@ -9,7 +10,12 @@ export class InstitutionsConroller {
   constructor(private institutionsService: InstitutionsService) {}
 
   @Get(routesConfig.institutions.list)
-  async getInstituitions(): Promise<any> {
-    return this.institutionsService.list();
+  async getInstituitions(): Promise<InstitutionDto[]> {
+    return this.institutionsService.getAll();
+  }
+
+  @Get(routesConfig.institutions.getById + ':id')
+  async getInstituitionById(@Param('id') id: string): Promise<InstitutionDto> {
+    return this.institutionsService.getById(id);
   }
 }
