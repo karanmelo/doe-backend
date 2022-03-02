@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { Type } from 'class-transformer';
-import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { Type, Transform } from 'class-transformer';
+import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class CreateInstitutionImageDto {
   @ApiProperty()
@@ -19,11 +19,13 @@ export class CreateInstitutionDto {
   name: string;
 
   @ApiProperty()
-  @IsNumber()
+  @IsNotEmpty()
+  @Transform((value) => Number(value))
   latitude: number;
 
   @ApiProperty()
-  @IsNumber()
+  @IsNotEmpty()
+  @Transform((value) => Number(value))
   longitude: number;
 
   @ApiProperty()
@@ -40,6 +42,7 @@ export class CreateInstitutionDto {
 
   @ApiProperty()
   @IsBoolean()
+  @Transform((value) => Boolean(value))
   open_on_weekends: boolean;
 
   @ApiProperty()
