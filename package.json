@@ -36,6 +36,7 @@
     "eslint": "eslint --fix 'src/**/*.ts'"
   },
   "dependencies": {
+    "@nestjs/cli": "^8.1.1",
     "@nestjs/common": "^8.0.6",
     "@nestjs/core": "^8.0.6",
     "@nestjs/jwt": "^8.0.0",
@@ -69,7 +70,6 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@nestjs/cli": "^8.1.1",
     "@nestjs/testing": "^8.0.6",
     "@types/axios": "^0.14.0",
     "@types/bcryptjs": "^2.4.2",
