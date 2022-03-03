@@ -2,6 +2,7 @@ import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import * as config from 'config';
+import { config as dotenvConfig } from 'dotenv';
 
 import { AppModule } from 'src/app.module';
 import { ServerConfig } from 'src/common/interfaces';
@@ -14,6 +15,8 @@ if (!process.env.IS_TS_NODE) {
 }
 
 async function bootstrap(): Promise<void> {
+  dotenvConfig();
+
   const envs = validateEnvs();
 
   const serverConfig: ServerConfig = config.get('server');

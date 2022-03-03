@@ -1,4 +1,4 @@
-import Dotenv from 'dotenv';
+import * as Dotenv from 'dotenv';
 import * as Yup from 'yup';
 import { ValidationError } from 'yup';
 
@@ -24,18 +24,13 @@ const dotEnvSchema = Yup.object().shape({
  * Checks if all needed environment variables exist
  */
 export const validateEnvs = (): Dotenv.DotenvParseOutput => {
-  const dotenvConfigOutput = Dotenv.config();
-  if (
-    dotenvConfigOutput.error !== undefined ||
-    dotenvConfigOutput.parsed === undefined
-  ) {
-    throw dotenvConfigOutput.error;
+  if (process.env.NODE_ENV !== 'production') {
+    Dotenv.config();
   }
-  const { parsed: envs } = dotenvConfigOutput;
 
-  dotEnvSchema.validate(envs).catch((error: ValidationError) => {
+  dotEnvSchema.validate(process.env).catch((error: ValidationError) => {
     throw error;
   });
 
-  return envs;
+  return process.env;
 };
