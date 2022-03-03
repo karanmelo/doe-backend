@@ -14,7 +14,10 @@ if (!process.env.IS_TS_NODE) {
 }
 
 async function bootstrap(): Promise<void> {
-  const envs = validateEnvs();
+  let envs;
+  if (process.env.NODE_ENV !== 'production') {
+    envs = validateEnvs();
+  }
 
   const serverConfig: ServerConfig = config.get('server');
   const logger = new Logger('bootstrap');
