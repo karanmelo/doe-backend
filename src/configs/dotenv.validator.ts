@@ -1,4 +1,4 @@
-import * as Dotenv from 'dotenv';
+import Dotenv from 'dotenv';
 import * as Yup from 'yup';
 import { ValidationError } from 'yup';
 
