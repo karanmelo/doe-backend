@@ -11,7 +11,7 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "prestart:prod": "rimraf dist && npm run build",
-    "start:prod:heroku": "node dist/main.js",
+    "start:prod:heroku": "node -r dotenv/config dist/main.js",
     "start:prod": "pm2 start dist/main.js",
     "restart:prod": "pm2 restart main",
     "stop:prod": "pm2 stop main",
