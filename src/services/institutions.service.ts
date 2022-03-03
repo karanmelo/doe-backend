@@ -30,13 +30,16 @@ export class InstitutionsService {
     }
   }
 
-  async create(institutionDto: CreateInstitutionDto): Promise<InstitutionDto> {
+  async create(
+    institutionDto: CreateInstitutionDto,
+    // files: Array<Express.Multer.File>,
+  ): Promise<InstitutionDto> {
     try {
       const institution = await this.institutionsProvider.create(
         institutionDto,
       );
 
-      return new InstitutionDto(institution as any);
+      return new InstitutionDto(institution);
     } catch (error) {
       const errorMessage = `Error trying to save institution data. ${error.message}.`;
 

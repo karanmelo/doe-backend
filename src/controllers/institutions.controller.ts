@@ -1,4 +1,14 @@
-import { Body, Controller, Get, Injectable, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Injectable,
+  Param,
+  Post,
+  UploadedFiles,
+  UseInterceptors,
+} from '@nestjs/common';
+import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
 import { InstitutionDto, CreateInstitutionDto } from 'src/common/dtos';
 import { routesConfig } from 'src/configs/routes.config';
@@ -19,10 +29,13 @@ export class InstitutionsConroller {
     return this.institutionsService.getById(institutionId);
   }
 
+  @UseInterceptors(AnyFilesInterceptor())
   @Post(routesConfig.institutions.create)
   async create(
     @Body() institutionDto: CreateInstitutionDto,
+    // @UploadedFiles() files: Array<Express.Multer.File>,
   ): Promise<InstitutionDto> {
     return this.institutionsService.create(institutionDto);
+    // return this.institutionsService.create(institutionDto, files);
   }
 }
