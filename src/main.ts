@@ -14,10 +14,7 @@ if (!process.env.IS_TS_NODE) {
 }
 
 async function bootstrap(): Promise<void> {
-  let envs;
-  if (process.env.NODE_ENV !== 'production') {
-    envs = validateEnvs();
-  }
+  const envs = validateEnvs();
 
   const serverConfig: ServerConfig = config.get('server');
   const logger = new Logger('bootstrap');
@@ -27,10 +24,7 @@ async function bootstrap(): Promise<void> {
 
   swagger.init(app);
 
-  if (
-    process.env.NODE_ENV === 'development' ||
-    envs.NODE_ENV === 'development'
-  ) {
+  if (envs.NODE_ENV === 'development') {
     app.enableCors();
   } else {
     app.enableCors({ origin: serverConfig.origin });
