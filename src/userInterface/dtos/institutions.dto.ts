@@ -1,4 +1,4 @@
-import { InsitutionDocument } from 'src/entities';
+import { InsitutionDocument } from 'src/core/domain/entities';
 export class ImageDto {
   id: number;
   path: string;

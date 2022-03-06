@@ -3,9 +3,9 @@ import { InjectModel } from '@nestjs/mongoose';
 
 import { Model } from 'mongoose';
 
-import { CreateInstitutionDto } from 'src/common/dtos';
-import { Institution, InsitutionDocument } from 'src/entities';
-import { InstitutionsData } from 'src/providers/institutions.provider';
+import { Institution, InsitutionDocument } from 'src/core/domain/entities';
+import { InstitutionsData } from 'src/core/providers/institutions.provider';
+import { CreateInstitutionDto } from 'src/userInterface/dtos';
 
 @Injectable()
 export class InstitutionsRepository implements InstitutionsData {

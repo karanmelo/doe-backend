@@ -2,7 +2,7 @@ import { Prop, Schema } from '@nestjs/mongoose';
 
 import { Document } from 'mongoose';
 
-import { SchemaFactoryWithMethods } from 'src/common/utils';
+import { SchemaFactoryWithMethods } from 'src/core/domain/entities/utils';
 
 export class Image {
   @Prop()

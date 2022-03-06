@@ -1,8 +1,8 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
-import { CreateInstitutionDto, InstitutionDto } from 'src/common/dtos';
-import { Institution } from 'src/entities';
-import { InstitutionsData } from 'src/providers';
+import { Institution } from 'src/core/domain/entities';
+import { InstitutionsData } from 'src/core/providers';
+import { InstitutionDto } from 'src/userInterface/dtos';
 
 @Injectable()
 export class InstitutionsService {
@@ -25,23 +25,6 @@ export class InstitutionsService {
       return new InstitutionDto(institution as any);
     } catch (error) {
       const errorMessage = `Error trying to get institution data for ID ${institutionId}. ${error.message}.`;
-
-      throw new InternalServerErrorException(errorMessage);
-    }
-  }
-
-  async create(
-    institutionDto: CreateInstitutionDto,
-    // files: Array<Express.Multer.File>,
-  ): Promise<InstitutionDto> {
-    try {
-      const institution = await this.institutionsProvider.create(
-        institutionDto,
-      );
-
-      return new InstitutionDto(institution);
-    } catch (error) {
-      const errorMessage = `Error trying to save institution data. ${error.message}.`;
 
       throw new InternalServerErrorException(errorMessage);
     }

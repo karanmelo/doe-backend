@@ -2,12 +2,14 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MulterModule } from '@nestjs/platform-express';
 
-import { serviceConfig } from 'src/configs/service.config';
-import { InstitutionsConroller } from 'src/controllers';
-import { Institution, InstitutionSchema } from 'src/entities';
-import { MulterConfigService } from 'src/plugins';
-import { InstitutionsProvider } from 'src/providers';
-import { InstitutionsService } from 'src/services';
+import { Institution, InstitutionSchema } from 'src/core/domain/entities';
+import { InstitutionsProvider } from 'src/core/providers';
+import { InstitutionsService } from 'src/core/service/queries';
+import { serviceConfig } from 'src/infrastructure/configs/service.config';
+import { MulterConfigService } from 'src/infrastructure/plugins';
+import { InstitutionsConroller } from 'src/userInterface/controllers';
+
+import { CreateInstitutionService } from './core/service/commands';
 
 @Module({
   imports: [
@@ -19,7 +21,11 @@ import { InstitutionsService } from 'src/services';
       useClass: MulterConfigService,
     }),
   ],
-  providers: [InstitutionsProvider, InstitutionsService],
+  providers: [
+    InstitutionsProvider,
+    InstitutionsService,
+    CreateInstitutionService,
+  ],
   controllers: [InstitutionsConroller],
 })
 export class AppModule {}

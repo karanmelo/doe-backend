@@ -10,14 +10,18 @@ import {
 } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 
-import { InstitutionDto, CreateInstitutionDto } from 'src/common/dtos';
-import { routesConfig } from 'src/configs/routes.config';
-import { InstitutionsService } from 'src/services/institutions.service';
+import { CreateInstitutionService } from 'src/core/service/commands';
+import { InstitutionsService } from 'src/core/service/queries';
+import { routesConfig } from 'src/infrastructure/configs/routes.config';
+import { InstitutionDto, CreateInstitutionDto } from 'src/userInterface/dtos';
 
 @Injectable()
 @Controller(routesConfig.institutions._)
 export class InstitutionsConroller {
-  constructor(private institutionsService: InstitutionsService) {}
+  constructor(
+    private institutionsService: InstitutionsService,
+    private createInstitutionService: CreateInstitutionService,
+  ) {}
 
   @Get(routesConfig.institutions.get)
   async get(): Promise<InstitutionDto[]> {
@@ -35,7 +39,7 @@ export class InstitutionsConroller {
     @Body() institutionDto: CreateInstitutionDto,
     // @UploadedFiles() files: Array<Express.Multer.File>,
   ): Promise<InstitutionDto> {
-    return this.institutionsService.create(institutionDto);
+    return this.createInstitutionService.execute(institutionDto);
     // return this.institutionsService.create(institutionDto, files);
   }
 }
