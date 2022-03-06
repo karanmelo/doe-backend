@@ -1,11 +1,12 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
-import { InstitutionsData } from 'src/core/providers';
+import { InstitutionDocument } from 'src/core/domain/entities';
+import { InstitutionsPort } from 'src/core/ports';
 import { CreateInstitutionDto, InstitutionDto } from 'src/userInterface/dtos';
 
 @Injectable()
 export class CreateInstitutionService {
-  constructor(private institutionsProvider: InstitutionsData) {}
+  constructor(private institutionsProvider: InstitutionsPort) {}
 
   async execute(
     institutionDto: CreateInstitutionDto,
@@ -16,7 +17,7 @@ export class CreateInstitutionService {
         institutionDto,
       );
 
-      return new InstitutionDto(institution);
+      return new InstitutionDto(institution as InstitutionDocument);
     } catch (error) {
       const errorMessage = `Error trying to save institution data. ${error.message}.`;
 

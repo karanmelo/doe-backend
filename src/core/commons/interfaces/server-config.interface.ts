@@ -1,4 +1,4 @@
-export interface ServerConfig {
+export interface IServerConfig {
   origin: string;
   port: string;
 }

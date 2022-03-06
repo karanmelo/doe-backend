@@ -5,4 +5,8 @@ export const routesConfig = {
     getById: '/:id',
     create: '/',
   },
+  challenge: {
+    _: 'challenge',
+    authenticate: '/authenticate',
+  },
 };

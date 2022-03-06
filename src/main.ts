@@ -5,7 +5,7 @@ import * as config from 'config';
 import { config as dotenvConfig } from 'dotenv';
 
 import { AppModule } from 'src/app.module';
-import { ServerConfig } from 'src/core/commons/interfaces';
+import { IServerConfig } from 'src/core/commons/interfaces';
 import { validateEnvs } from 'src/infrastructure/configs/dotenv.validator';
 import { serviceConfig } from 'src/infrastructure/configs/service.config';
 import swagger from 'src/infrastructure/configs/swagger.config';
@@ -19,7 +19,7 @@ async function bootstrap(): Promise<void> {
 
   const envs = validateEnvs();
 
-  const serverConfig: ServerConfig = config.get('server');
+  const serverConfig: IServerConfig = config.get('server');
   const logger = new Logger('bootstrap');
   const app = await NestFactory.create(AppModule);
 
@@ -36,7 +36,7 @@ async function bootstrap(): Promise<void> {
 
   const port = serviceConfig.port || serverConfig.port;
   await app.listen(port);
-  logger.log(`Application listening on port ${port}`);
+  logger.log(`Application is running on ${await app.getUrl()}`);
 }
 
 bootstrap();

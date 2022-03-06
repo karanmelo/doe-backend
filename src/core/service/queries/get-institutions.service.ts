@@ -1,12 +1,12 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 
 import { Institution } from 'src/core/domain/entities';
-import { InstitutionsData } from 'src/core/providers';
+import { InstitutionsPort } from 'src/core/ports';
 import { InstitutionDto } from 'src/userInterface/dtos';
 
 @Injectable()
 export class InstitutionsService {
-  constructor(private institutionsProvider: InstitutionsData) {}
+  constructor(private institutionsProvider: InstitutionsPort) {}
 
   async get(): Promise<InstitutionDto[]> {
     const institutions = await this.institutionsProvider.get();

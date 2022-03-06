@@ -4,15 +4,22 @@ import { MulterModule } from '@nestjs/platform-express';
 
 import { Institution, InstitutionSchema } from 'src/core/domain/entities';
 import { InstitutionsProvider } from 'src/core/providers';
+import {
+  CreateInstitutionService,
+  ChallengeAuthenticatorService,
+} from 'src/core/service/commands';
 import { InstitutionsService } from 'src/core/service/queries';
 import { serviceConfig } from 'src/infrastructure/configs/service.config';
 import { MulterConfigService } from 'src/infrastructure/plugins';
-import { InstitutionsConroller } from 'src/userInterface/controllers';
-
-import { CreateInstitutionService } from './core/service/commands';
+import { AuthPluginModule } from 'src/infrastructure/plugins/auth/auth.module';
+import {
+  ChallengeController,
+  InstitutionsConroller,
+} from 'src/userInterface/controllers';
 
 @Module({
   imports: [
+    AuthPluginModule,
     MongooseModule.forFeature([
       { name: Institution.name, schema: InstitutionSchema },
     ]),
@@ -21,11 +28,12 @@ import { CreateInstitutionService } from './core/service/commands';
       useClass: MulterConfigService,
     }),
   ],
+  controllers: [ChallengeController, InstitutionsConroller],
   providers: [
     InstitutionsProvider,
     InstitutionsService,
     CreateInstitutionService,
+    ChallengeAuthenticatorService,
   ],
-  controllers: [InstitutionsConroller],
 })
 export class AppModule {}

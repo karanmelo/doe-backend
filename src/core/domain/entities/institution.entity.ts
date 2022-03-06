@@ -37,11 +37,14 @@ export class Institution {
   @Prop()
   open_on_weekends: boolean;
 
+  @Prop({ default: () => new Date() })
+  created_at: Date;
+
   @Prop()
-  images: Image[];
+  images?: Image[];
 }
 
-export type InsitutionDocument = Institution & Document;
+export type InstitutionDocument = Institution & Document;
 
 export const InstitutionSchema =
   SchemaFactoryWithMethods.createForClass(Institution);
