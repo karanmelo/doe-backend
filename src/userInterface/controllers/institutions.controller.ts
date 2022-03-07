@@ -10,6 +10,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
+import { ApiTags } from '@nestjs/swagger';
 
 import { CreateInstitutionService } from 'src/core/service/commands';
 import { InstitutionsService } from 'src/core/service/queries';
@@ -17,6 +18,7 @@ import { routesConfig } from 'src/infrastructure/configs/routes.config';
 import { JwtAuthGuard } from 'src/infrastructure/plugins/auth/guards/jwt-auth.guard';
 import { InstitutionDto, CreateInstitutionDto } from 'src/userInterface/dtos';
 
+@ApiTags('Institutions')
 @Injectable()
 @Controller(routesConfig.institutions._)
 export class InstitutionsConroller {
