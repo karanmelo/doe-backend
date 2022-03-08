@@ -1,7 +1,7 @@
-import { Institution } from 'src/core/domain/entities';
-import { CreateInstitutionDto } from 'src/userInterface/dtos';
+import { CreateInstitutionDto } from 'src/core/dtos';
+import { Institution } from 'src/domain/entities';
 
-export abstract class InstitutionsPort {
+export abstract class InstitutionsDataPort {
   get: () => Promise<Institution[]>;
   getById: (institutionId: string) => Promise<Institution>;
   create: (createInstitutionDto: CreateInstitutionDto) => Promise<Institution>;

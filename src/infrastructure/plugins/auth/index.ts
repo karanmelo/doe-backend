@@ -4,3 +4,4 @@ export * from 'src/infrastructure/plugins/auth/guards/local-auth.guard';
 export * from 'src/infrastructure/plugins/auth/guards/jwt-auth.guard';
 export * from 'src/infrastructure/plugins/auth/auth.service';
 export * from 'src/infrastructure/plugins/auth/auth.module';
+export * from 'src/infrastructure/plugins/auth/auth.provider';

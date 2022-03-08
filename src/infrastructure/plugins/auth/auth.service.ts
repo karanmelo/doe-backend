@@ -1,25 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import { IChallengeAuthenticator } from 'src/core/commons/interfaces/';
+import { IAuthenticator, ISignInResponse } from 'src/core/commons/interfaces/';
 
 @Injectable()
 export class AuthService {
   constructor(private jwtService: JwtService) {}
-  async validate(clientId: string, clienteToken: string): Promise<boolean> {
+  async validate(authData: IAuthenticator): Promise<boolean> {
     if (
-      clientId !== process.env.CHALLENGE_CLIENT_ID ||
-      clienteToken !== process.env.CHALLENGE_CLIENT_TOKEN
+      authData.clientId !== process.env.CHALLENGE_CLIENT_ID ||
+      authData.clientToken !== process.env.CHALLENGE_CLIENT_TOKEN
     )
       return false;
     return true;
   }
 
-  async signIn(
-    challengeAuthenticator: IChallengeAuthenticator,
-  ): Promise<{ accessToken: string }> {
+  async signIn(authData: IAuthenticator): Promise<ISignInResponse> {
+    const { clientId, clientToken } = authData;
+
+    const payload: IAuthenticator = {
+      clientId,
+      clientToken,
+    };
+
     return {
-      accessToken: this.jwtService.sign(challengeAuthenticator),
+      accessToken: this.jwtService.sign(payload),
     };
   }
 }
