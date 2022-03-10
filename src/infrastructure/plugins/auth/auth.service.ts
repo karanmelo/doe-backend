@@ -6,6 +6,7 @@ import { IAuthenticator, ISignInResponse } from 'src/core/commons/interfaces/';
 @Injectable()
 export class AuthService {
   constructor(private jwtService: JwtService) {}
+
   async validate(authData: IAuthenticator): Promise<boolean> {
     if (
       authData.clientId !== process.env.CHALLENGE_CLIENT_ID ||

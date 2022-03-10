@@ -14,12 +14,12 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: dotenv.TYPEORM_PASSWORD,
   database: dotenv.TYPEORM_DATABASE || 'doe',
   entities: [dotenv.TYPEORM_ENTITIES] || [
-    rootDir + '/entities/models/*.{ts,js}',
+    `${rootDir}/entities/models/*.{ts,js}`,
   ],
   synchronize: dotenv.TYPEORM_SYNC === 'true',
   logging: false,
-  migrations: [rootDir + '/database/migrations/*.{ts,js}'],
+  migrations: [`${rootDir}/database/migrations/*.{ts,js}`],
   cli: {
-    migrationsDir: rootDir + '/database/migrations',
+    migrationsDir: `${rootDir}/database/migrations`,
   },
 };

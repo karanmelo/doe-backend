@@ -2,6 +2,7 @@ import { Institution } from 'src/domain/entities';
 
 export class ImageDto {
   id: number;
+
   path: string;
 }
 
@@ -22,13 +23,22 @@ export class InstitutionDto {
   }
 
   id: string;
+
   name: string;
+
   latitude: number;
+
   longitude: number;
+
   about: string;
+
   instructions: string;
+
   openingHours: string;
+
   openOnWeekends: boolean;
+
   createdAt: Date;
+
   images: ImageDto[];
 }
