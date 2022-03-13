@@ -6,6 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 export const serviceConfig = {
   port: process.env.PORT,
+  nodeEnv: process.env.NODE_ENV,
   mongoUrl: process.env.MONGO_URL || 'mongodb://localhost/doe',
   jwtSecret: process.env.JWT_SECRET || 'secret',
   jwtExpiration: process.env.JWT_EXPIRATION || '1d',

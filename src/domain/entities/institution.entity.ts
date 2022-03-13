@@ -3,7 +3,7 @@ export class Image {
 
   originalName: string;
 
-  filenName: string;
+  fileName: string;
 
   mimeType: string;
 
@@ -14,6 +14,8 @@ export class Institution {
   id: string;
 
   name: string;
+
+  phone: string;
 
   latitude: number;
 
