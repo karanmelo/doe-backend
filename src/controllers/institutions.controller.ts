@@ -44,9 +44,8 @@ export class InstitutionsConroller {
   @UseInterceptors(AnyFilesInterceptor())
   async create(
     @Body() institutionDto: CreateInstitutionDto,
-    // @UploadedFiles() files: Array<Express.Multer.File>,
+    @UploadedFiles() files: Array<Express.Multer.File>,
   ): Promise<InstitutionDto> {
-    return this.createInstitutionService.execute(institutionDto);
-    // return this.institutionsService.create(institutionDto, files);
+    return this.createInstitutionService.execute(institutionDto, files);
   }
 }

@@ -6,7 +6,19 @@ import { IsBoolean, IsNotEmpty, IsNumber, IsString } from 'class-validator';
 export class CreateInstitutionImageDto {
   @ApiProperty()
   @IsNumber()
-  id: number;
+  id: string;
+
+  @ApiProperty()
+  @IsString()
+  originalName: string;
+
+  @ApiProperty()
+  @IsString()
+  filenName: string;
+
+  @ApiProperty()
+  @IsString()
+  mimeType: string;
 
   @ApiProperty()
   @IsString()

@@ -1,7 +1,19 @@
-import { Institution } from 'src/domain/entities';
+import { Image, Institution } from 'src/domain/entities';
 
 export class ImageDto {
-  id: number;
+  constructor(image?: Image) {
+    if (image) {
+      Object.assign(this, image);
+    }
+  }
+
+  id: string;
+
+  originalName: string;
+
+  filenName: string;
+
+  mimeType: string;
 
   path: string;
 }

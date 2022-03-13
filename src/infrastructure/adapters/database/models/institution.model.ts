@@ -6,7 +6,16 @@ import { SchemaFactoryWithMethods } from 'src/infrastructure/adapters/database/m
 
 export class ImageModel {
   @Prop()
-  id: number;
+  id: string;
+
+  @Prop()
+  originalName: string;
+
+  @Prop()
+  filenName: string;
+
+  @Prop()
+  mimeType: string;
 
   @Prop()
   path: string;

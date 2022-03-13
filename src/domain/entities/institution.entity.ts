@@ -1,5 +1,11 @@
 export class Image {
-  id: number;
+  id: string;
+
+  originalName: string;
+
+  filenName: string;
+
+  mimeType: string;
 
   path: string;
 }
