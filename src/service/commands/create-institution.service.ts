@@ -14,16 +14,17 @@ export class CreateInstitutionService {
     files: Array<Express.Multer.File>,
   ): Promise<InstitutionDto> {
     try {
-      const images = files.map((file: Express.Multer.File) => {
+      const images = files.map((file: Express.MulterS3.File) => {
         const image = new Image();
-        image.id = file.filename.split('.')[0];
+        image.id = file.filename?.split('.')[0] || file.key?.split('.')[0];
         image.originalName = file.originalname;
-        image.fileName = file.filename;
+        image.fileName = file.filename || file.key;
         image.mimeType = file.mimetype;
         image.path =
-          serviceConfig.nodeEnv === 'development'
+          serviceConfig.nodeEnv === 'development' &&
+          serviceConfig.storageType === 'local'
             ? `http://localhost:${serviceConfig.port}/uploads/${file.filename}`
-            : file.path;
+            : file.path || file.location;
 
         return new ImageDto(image);
       });
