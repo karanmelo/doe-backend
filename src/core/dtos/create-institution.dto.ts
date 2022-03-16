@@ -14,7 +14,7 @@ export class CreateInstitutionImageDto {
 
   @ApiProperty()
   @IsString()
-  filenName: string;
+  fileName: string;
 
   @ApiProperty()
   @IsString()
@@ -29,6 +29,10 @@ export class CreateInstitutionDto {
   @ApiProperty()
   @IsString()
   name: string;
+
+  @ApiProperty()
+  @IsString()
+  phone: string;
 
   @ApiProperty()
   @IsNotEmpty()

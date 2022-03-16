@@ -22,6 +22,7 @@ export class InstitutionFactory {
   create(createInstitutionDto: Institution): Institution {
     const institution = new Institution();
     institution.name = createInstitutionDto.name;
+    institution.phone = createInstitutionDto.phone;
     institution.about = createInstitutionDto.about;
     institution.latitude = createInstitutionDto.latitude;
     institution.longitude = createInstitutionDto.longitude;

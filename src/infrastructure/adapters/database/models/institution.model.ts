@@ -12,7 +12,7 @@ export class ImageModel {
   originalName: string;
 
   @Prop()
-  filenName: string;
+  fileName: string;
 
   @Prop()
   mimeType: string;
@@ -27,6 +27,9 @@ export class ImageModel {
 export class InstitutionModel {
   @Prop()
   name: string;
+
+  @Prop()
+  phone: string;
 
   @Prop()
   latitude: number;

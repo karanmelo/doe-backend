@@ -3,6 +3,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateInstitutionDto, ImageDto, InstitutionDto } from 'src/core/dtos';
 import { InstitutionsDataPort } from 'src/core/ports';
 import { Image } from 'src/domain/entities';
+import { serviceConfig } from 'src/infrastructure/configs/service.config';
 
 @Injectable()
 export class CreateInstitutionService {
@@ -13,13 +14,17 @@ export class CreateInstitutionService {
     files: Array<Express.Multer.File>,
   ): Promise<InstitutionDto> {
     try {
-      const images = files.map((file: Express.Multer.File) => {
+      const images = files.map((file: Express.MulterS3.File) => {
         const image = new Image();
-        image.id = file.filename.split('.')[0];
+        image.id = file.filename?.split('.')[0] || file.key?.split('.')[0];
         image.originalName = file.originalname;
-        image.filenName = file.filename;
+        image.fileName = file.filename || file.key;
         image.mimeType = file.mimetype;
-        image.path = file.path;
+        image.path =
+          serviceConfig.nodeEnv === 'development' &&
+          serviceConfig.storageType === 'local'
+            ? `http://localhost:${serviceConfig.port}/uploads/${file.filename}`
+            : file.path || file.location;
 
         return new ImageDto(image);
       });
@@ -32,8 +37,6 @@ export class CreateInstitutionService {
       const institution = await this.institutionsProvider.create(
         createInstitution,
       );
-
-      console.log(files);
 
       return new InstitutionDto(institution);
     } catch (error) {

@@ -14,9 +14,6 @@ import { serviceConfig } from 'src/infrastructure/configs/service.config';
 
 const MAX_SIZE_TO_MEGABYTES = Number(serviceConfig.maxSizeToMegabites);
 
-// TODO:
-// Objeto: atualizar para que seja dinâmico
-// Problema: quando utiliza variável de ambiente ou o método getConfig() retorna undefined
 const STORAGE_TYPE = serviceConfig.storageType;
 const AWS_S3_BUCKET_NAME = serviceConfig.awsS3BucketName;
 

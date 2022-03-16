@@ -11,7 +11,7 @@ export class ImageDto {
 
   originalName: string;
 
-  filenName: string;
+  fileName: string;
 
   mimeType: string;
 

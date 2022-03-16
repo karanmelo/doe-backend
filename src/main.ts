@@ -3,6 +3,8 @@ import { NestFactory } from '@nestjs/core';
 
 import * as config from 'config';
 import { config as dotenvConfig } from 'dotenv';
+import * as express from 'express';
+import { join } from 'path';
 
 import { AppModule } from 'src/app.module';
 import { IServerConfig } from 'src/core/commons/interfaces';
@@ -29,6 +31,7 @@ async function bootstrap(): Promise<void> {
 
   if (envs.NODE_ENV === 'development') {
     app.enableCors();
+    app.use('/uploads', express.static(join(process.cwd(), 'uploads')));
   } else {
     app.enableCors({ origin: serverConfig.origin });
     logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
